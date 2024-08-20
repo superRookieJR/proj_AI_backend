@@ -3,21 +3,23 @@ const app = express()
 const authentication = require('./routes/authentication/authentication');
 const user = require('./routes/user/user');
 const score = require('./routes/score/score');
+const topscore = require('./routes/score/topscore');
 const { authenticateToken } = require('./script/authentication.validate');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(authentication)
-app.use(user)
-app.use(score)
+app.use(authentication);
+app.use(user);
+app.use(score);
+app.use(topscore);
 
 app.get('/test', (req, res) => {
     res.send({
         status: 200,
         message: 'API Still Alive!!!',
     })
-})
+});
 
 app.get('/testtoken', authenticateToken, (req, res) => {
     res.send({
@@ -25,6 +27,6 @@ app.get('/testtoken', authenticateToken, (req, res) => {
         message: "Token valid",
         user: req.user 
     })
-})
+});
 
-app.listen(3000, () => {})
+app.listen(3000, () => {});
