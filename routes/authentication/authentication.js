@@ -1,8 +1,8 @@
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 const { db } = require('../../script/firebase')
-const { doc, setDoc, getDoc } = require('firebase/firestore'); 
-const e = require('express');
+const { doc, setDoc, getDoc } = require('firebase/firestore');
 
 router.post('/signup', async (req, res) => {
     const userDoc = await getDoc(doc(db, "users", req.body.username));
@@ -41,12 +41,21 @@ router.post('/signin', async (req, res) => {
             const userData = userDoc.data();
             
             if (userData.password === req.body.password) {
+                const token = jwt.sign(
+                    {
+                        username: userData.username,
+                    },
+                    'shhhhh',
+                    { expiresIn: '1h' }
+                );
+
                 res.send({
                     status: 200,
                     message: 'Sign in successful',
+                    token: token,
                     data: {
-                        username: userDoc.data().username,
-                        score: userDoc.data().score
+                        username: userData.username,
+                        score: userData.score
                     }
                 });
             } else {
