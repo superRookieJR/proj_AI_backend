@@ -12,7 +12,7 @@ router.post('/signup', async (req, res) => {
             status: 400,
             message: "Username already exists"
         })
-    }else if(userDoc.exists()){
+    }else if(!userDoc.exists()){
         try {
             await setDoc(doc(db, "users", req.body.username), {
                 username: req.body.username,

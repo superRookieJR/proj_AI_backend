@@ -13,7 +13,6 @@ router.get('/score/topscore', async (req, res) => {
             score: doc.data().score
         }));
 
-        // Send the response with the top 100 users
         res.send({
             status: 200,
             data: topUsers
