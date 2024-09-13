@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cors = require('cors');
 const authentication = require('./routes/authentication/authentication');
 const user = require('./routes/user/user');
 const score = require('./routes/score/score');
@@ -7,6 +8,11 @@ const topscore = require('./routes/score/topscore');
 const game = require('./routes/game/game');
 const { authenticateToken } = require('./script/authentication.validate');
 
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+    credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
