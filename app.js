@@ -5,7 +5,7 @@ const authentication = require('./routes/authentication/authentication');
 const user = require('./routes/user/user');
 const score = require('./routes/score/score');
 const topscore = require('./routes/score/topscore');
-const game = require('./routes/game/game');
+// const game = require('./routes/game/game');
 const { authenticateToken } = require('./script/authentication.validate');
 
 app.use(cors({
@@ -20,7 +20,7 @@ app.use(authentication);
 app.use(user);
 app.use(score);
 app.use(topscore);
-app.use(game);
+// app.use(game);
 
 app.get('/test', (req, res) => {
     res.send({
